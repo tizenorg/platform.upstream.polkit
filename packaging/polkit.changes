@@ -1,0 +1,838 @@
+* Tue Nov 19 2013 Michael Leibowitz <michael.leibowitz@intel.com> 0.112@847366c
+- package polkit for tizen
+- prefix/lib/polkit -> libdir/polkit
+- Update NEWS for release
+- pkcheck: Support --process=pid,start-time,uid syntax too
+- polkitunixprocess: Deprecate racy APIs
+- Update the czech once more with newest pot file.
+- Add czech translation po file to distribution.
+- Use GOnce for interface type registration
+- Post-release version bump to 0.112
+- Update NEWS for release
+- Fix inclusion of COPYING into documentation with srcdir != builddir
+- Exit pkaction with status 0 on success
+- Refuse unrecognized command-line operands
+- Add bug reporting address and home page to --help output
+- Fix package version / bug report address mixing
+- Don't spawn man for --help
+- Remove an unused va_start
+- Fix a memory leak
+- Drop unused variable
+- Refuse non-string parameters to Polkit.spawn()
+- Fix handling of null returned from _runRules
+- Fix a TypeError when no admin rules are registered
+- More warnings about using auth_self*
+- Use auth_admin* instead of auth_self* in examples
+- man: Fix pkaction man page wrt to --action-id option
+- jsauthority: Work with mozjs-17.0 too
+- Revert "Dynamically load libmozjs185.so and cope with it not being available"
+- jsauthority: Use JSVAL_NULL rather than {0} struct initialization
+- jsauthority: We can really only handle a string
+- Add a FIXME to polkitprivate.h
+- Add annotations for element types of returned lists
+- Fix an obvious docstring typo.
+- Fold enum documentation into relevant classes
+- Document deprecated functions.
+- Include documentation of polkit_action_description_get_annotation_keys
+- Move polkit_temporary_authorization_new to private header file.
+- Fix most "undocumented symbol" warnings
+- Leave out backend from gtk-doc generation
+- Add annotation glossary
+- Fix various memory leaks.
+- configure: Specify GLib min/max version
+- Fix DOC_SOURCE_DIR for builddir != srcdir
+- Fix build with srcdir!=builddir
+- Clean (git status) after autogen.sh
+- Add missing #include <sys/wait.h>
+- update types for js188
+- mocklibc: Only require autoconf 2.63
+- pkexec: Set process environment from pam_getenvlist()
+- polkitagent, pkexec: Respect SUID_CFLAGS and SUID_LDFLAGS
+- build: try harder to avoid systemd/consolekit misconfiguration
+- Fix the build with automake 1.13
+- Post-release version bump to 0.111
+- Update NEWS for release
+- Remove AM_PROG_CC_STDC
+- Use mutex and condition variables properly
+- Fix build on GNU Hurd
+- build: Remove generated introspection files on "make clean"
+- Set XAUTHORITY environment variable if is unset
+- Post-release version bump to 0.110
+- Update NEWS for release
+- Don't require libmozjs185 devel packages for polkit rules to work
+- Include gmodule-2.0 to avoid linker errors
+- Post-release version bump to 0.109
+- Update NEWS for release
+- docs: mention the audience for authorization rules
+- Dynamically load libmozjs185.so and cope with it not being available
+- build: Fix .gir generation for parallel make
+- PolkitAgent: Avoid crashing if initializing the server object fails
+- Fall back to authenticating as uid 0 if the list of admin identities is empty
+- Post-release version bump to 0.108
+- Update NEWS for release
+- pkexec: add support for argv1 annotation and mention shebang-wrappers
+- Introduce a polkit.Result enumeration for authorization rules
+- Nuke --enable-verbose flag
+- Nuke leftover polkit-backend-1.pc file
+- Try harder to look up the right localization
+- Update guidance on situations where there is no polkit authority
+- Post-release version bump to 0.107
+- Update NEWS for release
+- docs: add a "make sure your app works when there's no polkitd(8)" note
+- Mention the implications of returning *_keep in an authorization rule
+- Make it work when using ConsoleKit instead of libsystemd-login
+- agenthelper-pam: Fix newline-trimming code
+- autogen.sh: Fix check for libtool (we only need libtoolize)
+- build: Check for mozjs185, not libjs
+- State that authorization rules must not rely on SpiderMonkey features
+- Small updates to the "Writing polkit applications" chapter
+- Update pkexec(1) man page with example
+- Update links to udisks docs
+- Rewrite the "Writing polkit applications" chapter
+- Log when the name org.fd.PolicyKit1 has been acquired
+- Run polkitd as an unprivileged user
+- Remove unused DBUS_GLIB_* and GIO_* variables
+- Ensure polkitd is rebuilt if libpolkit-backend-1.la changes
+- Move polkitd into src/polkitbackend
+- Use g_unix_signal_add() from GLib 2.30
+- Clarify pkexec(1) variables
+- Combine action and details parameters
+- Use a condition variable to signal that runaway killer thread is ready
+- Terminate runaway scripts
+- Use "rules", not "scripts" to refer to files in rules.d
+- Pass expanded identity list to the AuthenticationSession
+- Add default rules
+- Store private binaries in /usr/lib/polkit-1 instead of /usr/libexec
+- Mention systemd(1) in the polkitd(8) man page
+- Nuke polkitbackend library, localauthority backend and extension system
+- Add a systemd .service file
+- Fix distcheck
+- Rename --enable-systemd to --enable-libsystemd-login
+- Add real-world example featuring udisks2 and the drive.* variables it passes
+- Make polkit_details_insert() remove the key if passed value is NULL
+- Use <variablelist> instead of <informaltable> for Subject attributes
+- Mention details["polkit.message"] and add an example using details
+- Fix a couple typos in the docs
+- Fix speling
+- polkitd: add reference to polkit(8) from its man page
+- Clarify docs a bit
+- docs: update SEE ALSO to make each man page point to all other man pages
+- docs: enclose local <citerefentry> in <link> to make links work
+- Update docs
+- Create rules.d directories
+- Add test-cases and 10 second timeout for polkit.spawn()
+- Mention unix-netgroup:xyz as a valid return value in addAdminRule() functions
+- Minor doc fixes
+- Add netgroup support
+- Test that subject.isInGroup() works
+- Add test cases for evaluation order
+- docs: emphasize that registered functions may actually never be called
+- Use addRule() and addAdminRule()
+- Also load rules from /usr/share/polkit/rules.d
+- docs: clarify how rules files work
+- Also add an example of polkit.spawn() to polkit(8) man page
+- docs: add AUTHORIZATION RULES section to the polkit(8) man page
+- Don't include command-line in spawning error messages
+- Make polkit.spawn() take an array of arguments instead of a command-line
+- Add polkit.spawn() to spawn external programs
+- Make it possible for JS code to change details
+- Reformat init.js and also avoid quoting non-string properties in toString()
+- Emit ::Changed signal after reloading rules
+- Collect garbage
+- Add a couple of more error checks
+- Clean up code a bit
+- Pass details to JS functions and simplify how Subject instances are constructed
+- Include seat and session in Subject object
+- Add experimental authority backend using JavaScript rule files
+- Post-release version bump to 0.106
+- Update NEWS for release
+- Add Makefile rules for signing and publishing releases and docs
+- Update the docs to use 'polkit' (instead of 'PolicyKit') as the name
+- Mention pkttyagent(1) in "Writing PolicyKit applications" chapter
+- Fix type in docs
+- Make it possible to influence agent registration with an a{sv} parameter
+- Add pkttyagent(1) helper
+- PolkitAgentSession: Don't leak file descriptors
+- PolkitUnixSession: Actually return TRUE if a session exists
+- PolkitUnixSession: Set error if we cannot find a session for the given pid
+- Various builddir != srcdir fixes
+- Post-release version bump
+- Update NEWS for release
+- Detect whether systemd is available and default to use if so
+- Add optional systemd support
+- Bug 43610 - Add netgroup support
+- Bug 43608 – Add unit tests
+- Post-release version bump to 0.104
+- Fix typo
+- Update NEWS for release
+- Default to AdminIdentities=unix-group:wheel for local authority
+- Mistype in DBus object: PoliycKit1 -> PolicyKit1
+- Bug 41025 – Add org.freedesktop.policykit.owner annotation
+- Add --no-debug option and use this for D-Bus activation
+- Add support for the org.freedesktop.policykit.imply annotation
+- Post-release version bump to 0.103
+- Update NEWS for release
+- Fix multi-line pam prompt handling
+- Specify exported pkg-config files in GIRs
+- Bug 38769 — pkexec: Support running X11 apps
+- Fix backend crash if a .policy file does not specify <message>
+- Ignore .po/ for intltool
+- pkexec: Avoid TOCTTOU problems with parent process
+- Use polkit_unix_process_get_uid() to get the owner of a process
+- Make PolkitUnixProcess also record the uid of the process
+- PolkitUnixProcess: Clarify that the real uid is returned, not the effective one
+- Don't show diagnostic messages intended for the administrator to the end user
+- introspection: Add --c-include to the gir files
+- Post-release version bump to 0.102
+- Update NEWS for release
+- Build examples by default and fix compiler warnings
+- Fix a couple of warnings triggered by gcc 4.6
+- Deprecated PolkitBackendActionLookup
+- Allow overriding message shown in authentication dialog
+- Bug 29712 – Use monotonic for temporary authorizations
+- Be a bit more careful parsing the command-line
+- pkcheck: Make it possible to list and revoke temporary authorizations
+- Make pkcheck(1) report if the authentication dialog was dismissed
+- Bug 27253 – Use GOBJECT_INTROSPECTION_CHECK from gobject-introspection
+- Be more specific about what info we want when enumerating files
+- Fix a memory leak
+- Bug 32334 – Always set polkit.retains_authorization_after_challenge
+- Bug 30438 – PolicyKit fails to build on AIX
+- Bug 29871 – Fix build failures with binutils-gold
+- Bug 27081 – pkexec fails to build on non glibc systems
+- Bug 30653 – No way to detect cancellation in pkexec
+- Post-release version bump to 0.101
+- Fix 'make distcheck'
+- Update NEWS for release
+- Pass caller and subject pid to authentication agent
+- Add a note about POLKIT_DEBUG
+- Always pass non-zero value to g_once_init_leave()
+- Fix up debug and timeouts in agent helper
+- Add some debug info that can be shown with the env var POLKIT_DEBUG
+- Improve error reporting for authentication sessions
+- Fix-up PolkitAgentSession to use GObject properties
+- Build gir/typelib for PolkitAgent-1.0
+- Add missing GObject Introspection annotations
+- Post-release version bump to 0.100
+- Update NEWS for release
+- Fix another GCC uninitialized variable warning
+- Fix (correct) GCC warning about possibly-uninitialized variable
+- Remove duplicate definitions of enumeration types
+- Bug 29816 – Install polkitagentenumtypes.h
+- Post-release version bump to 0.99
+- Update NEWS for release
+- Fix dist-check
+- Various doc cleanups
+- Fix wording in pkexec(1) man page
+- pkcheck: add --enable-internal-agent option
+- pkexec: add --disable-internal-agent option
+- Fix ConsoleKit interaction bug
+- Add textual authentication agent and use it in pkexec(1)
+- Fix scanning of unix-process subjects
+- Require GLib 2.25.12
+- Post-release version bump to 0.98
+- Update NEWS for release
+- Properly reference headers
+- Don't dist org.freedesktop.ConsoleKit.xml; It's dead, Jim
+- Update GI annotations
+- PolkitBackend: Don't export unneeded convenience API
+- Use polkit_authority_get_sync() instead of deprecated polkit_authority_get()
+- Add g_return_if_fail() to all public API entry points
+- PolkitAuthority: Add g_return_if_fail() checks
+- PolkitAuthority: Implement failable initialization
+- Add a GPermission implementation
+- Merge remote branch 'origin/gdbus'
+- Update README
+- Make NameOwnerChanged a private impl detail of the interactive authority
+- Remove Lock Down functionality
+- Implement polkit_temporary_authorization_new_for_gvariant()
+- Make polkitd accept --replace and gracefully handle SIGINT
+- Nuke eggdbus usage
+- Add generated docbook D-Bus API docs to git
+- Port PolkitAgent to gdbus
+- Port PolkitBackendInteractiveAuthority to gdbus
+- Port CK class to gdbus
+- Port core bits to gdbus
+- Bug 29051 – Configuration reload on every query
+- Add shadow support
+- Bug 26982 – pkexec information disclosure vulnerability
+- Post-release version bump to 0.97
+- Update NEWS for release
+- Don't log authorization checks
+- Post-release version bump to 0.96
+- Complain on stderr, not stdout
+- Save original cwd in pkexec(1) since it will change during the life-time
+- Make pkexec(1) use the syslogging facilities
+- Make pkexec(1) validate environment variables
+- Fix error message when no authentication agent is available
+- Properly handle return value from getpwnam_r()
+- Remove trailing whitespace from log messages
+- Bug 25594 – System logging
+- Fix up last comment
+- Run the open_session part of the PAM stack in pkexec(1)
+- Fix logic error in pk-example-frobnicate
+- Bug 25367 — Also read local authority configuration data from /etc
+- Update NEWS for release
+- Fix make distcheck
+- Add Python example
+- Properly validate all arguments passed via D-Bus
+- Clarify pklocalauthority(8) man page
+- Remove TODO about symbol visibility as this has been fixed for a while
+- Drop ununsed policykit actions
+- Port lockdown from pklalockdown(1) to D-Bus methods
+- Add methods AddLockdownForAction() and RemoveLockdownForAction()
+- Bug 24176 – Current git master fails to build, GLIB_LDADD -> GLIB_LIBS
+- Bug 24235 – polkit-agent-helper may call pam_end with a stale pam handle
+- Bug 24640 – Typos in pklocalauthority(8)
+- Bug 24566 – Properly _ref authority in singleton constructor
+- Bug 24495 – Fails to build on platforms without PATH_MAX (like hurd)
+- Clarify when AllowUserInteraction should and shouldn't be used
+- Add properties with information about the currently used authority
+- Fix process start time when using polkit_unix_process_new_full()
+- Clarify comment on where to find process start-time on Linux
+- Pass --libtool to g-ir-scanner
+- Add missing comma so we're save both LANG and LANGUAGE, not only LANGLANGUAGE
+- Remove POLKIT_USER from configuration summary
+- Don't include Polkit-1.0.gir in the dist tarball
+- Remove POLKIT_USER option
+- Enable silent rules
+- Make examples optional
+- Make private symbols accessible to libpolkitagent and libpolkitbackend
+- Use _polkit_agent_marshal prefix
+- Trim the list of exported symbols
+- Implement lockdown for the Local Authority implementation
+- Bug 23867 – UnixProcess vs. SystemBusName aliasing
+- Sort by action id in pkaction(1) output
+- Use correct program name when complaining about not being setuid root
+- Post-release version bump to 0.95
+- Update NEWS for release
+- Generate GI gir and typelibs for libpolkit-gobject-1
+- Remove temporary authorization when the subject it applies to vanishes
+- Don't set the GError if the process doesn't exist
+- Pass the right struct offset for the ::changed class signal handler
+- Bug 23093 – FreeBSD portability fixes
+- Be more careful when determining process start time
+- Ensure all fds except stdin/stdout/stderr are closed after exec(2)
+- Add polkit.retains_authorization_after_challenge to authz result
+- Don't spawn man(1) from a setuid program
+- Allow unprivileged callers to check authorizations
+- Ignore .pkla files starting with dot and don't segfault on error path
+- Require correct versions of glib and eggdbus
+- Post-release version bump to 0.94
+- Update NEWS for release
+- Update TODO
+- Fix make distcheck
+- Add support for querying and revoking temporary authorizations
+- Add docs detailing how the Local Authority works
+- Rename some man pages and the daemon binary
+- In .pkla files, use Result{Any,Inactive,Active} instead of just Result
+- Actually make the local authority look up authorization files
+- Also pass the identity of the subject we are checking for
+- Move authentication agent bits to separate authority subclass
+- Rip out polkit-local and refactor local authority to only use tmp authz
+- Move local authority management to a separate library
+- Plug a couple of memory leaks
+- Cancel an authentication if the unique name for the subject vanishes
+- GIO modules need to be prefix with lib
+- More unique ids to get the docs build fully predictable
+- Use unique ids for sections to prevent them being autogenerated
+- Post-release version bump to 0.93
+- Also dist polkitd-1.xml
+- Update NEWS
+- Fix make distcheck
+- Change GNOME to freedesktop.org in the docs
+- Move the doc chapters around a bit
+- Minor doc fixes
+- Use .../extensions instead of ../backends for loading extensions
+- Expand on the D-Bus docs
+- Consolidate all gtk-doc stuff in docs/polkit
+- Add a "PolicyKit Overview" section to the docs
+- Add some more API docs
+- Improve pkexec(1) man page by adding screenshots of authentication dialogs
+- First cut at some high-level docs
+- Add a man page for polkit-1(8)
+- Update SEE ALSO sections in man pages
+- Add pkaction(1) and nuke polkit-1(1) commands
+- Return the icon name instead of a GIcon in PolkitActionDescription
+- nullbackend: Catch up with latest API changes
+- Add pkcheck(1) command to check for authorizations
+- Clarify docs for is_challenge member of the AuthorizationResult struct
+- Avoid returning an error if no authentication agent is available
+- Only free hash table if it's not NULL
+- Require eggdbus-1 >= 0.4
+- Change the defaults for .run-frobnicate to auth_self_keep
+- Forgot to add source for PolkitDetails
+- Use an object, not a GHashTable when passing details around
+- Fix a bug where details were not shown for normal pkexec usage
+- Mention /usr/bin/pkexec in the configure blurb
+- Add a pkexec(1) command
+- Move docs to proper location
+- Port examples and command-line tools to new API
+- Change the PolkitAuthorizationResult enumeration into an object
+- Only allow privileged apps to check authz and add ActionLookup interface
+- Fix D-Bus policy to work with non-permissive D-Bus
+- add a draft version of the porting guide -- WIP
+- fix up gtk-doc API markup for a couple of functions
+- install gtkdoc HTML in the proper location
+- post-release version bump to 0.92
+- make it possible to define what administrator authentication means
+- add security checks for AddAuthorization() and RemoveAuthorization()
+- rename grant->add and revoke->remove in the polkit-1 tool
+- add security checks for EnumerateAuthorizations
+- remember to dist 50-nullback.conf
+- prune TODO list and fix up single-header-file / API guard checks
+- add the ObtainAuthorization() method and use in for the 'polkit-1 run' command
+- load and choose what backend to use; also write a simple null backend
+- implement cancellation of authorization checks
+- don't hardcode the uid, look it up in /proc
+- make authentication agents pass a session_id parameter
+- generate all polkit dbus code in one place
+- update for latest EggDBus changes
+- fix up the D-Bus docs somewhat
+- use new eggdbus feature to include enums/structs docs in the interface docs
+- user proper capitalization for AuthenticationAgent D-Bus interface summary
+- add docs for the AuthenticationAgent D-Bus interface
+- add docs for the AuthorityManager D-Bus interface
+- add docs for the Authority D-Bus interface
+- depend on EggDBus HEAD for stamp file and Docbook docs for D-Bus interfaces
+- post-release version bump to 0.91
+- add docs for PolkitBackendAuthority
+- rework backend API
+- add API docs for PolkitAuthority
+- replace PolkitBackendServer with polkit_backend_register_authority()
+- move management functions to a separate D-Bus interface and GObject class
+- require POLKIT_AGENT_I_KNOW_API_IS_SUBJECT_TO_CHANGE to be defined
+- fix up polkitagent docs
+- add docs for PolkitAgentListener
+- collapse request into a single signal and add docs for PolkitAgentSession
+- add more debug and work around what looks like a bug in fflush(3)
+- rework API of polkitagent
+- fix up debug/error messages for the authentication agent
+- clean up trailing whitespace in TODO file
+- update docs/TODO with TODOs from the source code
+- trivial cleanup
+- write HACKING file
+- fill out sections about subject/identity in the man page
+- limit Change() signal storm by looking at the file monitor event
+- add Changed() signal that is fired when actions/authorizations change
+- remove debug spew for 'run' command in polkit-1
+- make authentication agents reconnect if polkitd-1 is restarted
+- add TODO item about having the authentication agent reconnect
+- add a TODO item about the need for file monitors
+- implement 'run' command for polkit-1
+- add TODO item about being able to cancel a CheckAuthorization() call
+- update TODO list
+- remove TODO item about moving commits to main repo as this is done
+- Merge branch 'master' of /home/davidz/Hacking/polkit
+- prepare for merge of rewritten PolicyKit
+- split core TODO items into separate groups for core and backend
+- update TODO list
+- start writing a TODO list
+- also dist org.freedesktop.ConsoleKit.xml
+- fix 'make distcheck'
+- fix up docs
+- finish authentication agent integration
+- add more infrastructure for authentication agent integration
+- honor implicit authorizations
+- add enumeration and handling of implicit authorizations
+- implement UnregisterAuthenticationAgent()
+- add infrastructure for registering/unregistering authentication agents
+- add a hash() method to the Subject interface
+- remember to install polkittypes.h
+- first cut at authentication helper library
+- add pkgconfig files
+- add buildsys stuff for authentication library support
+- restrict add/remove of temporary authorizations to users
+- rename check_temporary_authorization_for_subject() to something more logical
+- make it possible to grant/revoke/use authorizations from groups
+- implement adding/removing temporary authorizations
+- implement grant and revoke for permanent authorizations
+- make CheckAuthorization() use permanent authorizations on disk
+- begin writing the implementation of the local authorization backend
+- add a hash() method to PolkitIdentity
+- forgot to add new PolkitIdentity interface
+- split Subject into Subject and Identity and revise API
+- add remaining glue for {Add,Remove,Enumerate}Authorization
+- rename CheckClaim() to CheckAuthorization()
+- slighty fix up docs
+- add checks for whether someone is authorized to check authorizations
+- add PolkitUnixSession and associcated functions
+- remove attributes from AuthorizationClaim and CheckClaim()
+- implement 'polkit-1 list authorizations'
+- add async versions of PolkitAuthority methods
+- rudimentary monitoring of seats and sessions
+- start writing a SessionMonitor class
+- add debug for each CheckClaim() call
+- add infrastructure for CheckClaim() method
+- introduce a PendingCall type to make all backend operations async
+- add polkit_unix_user_new_for_name()
+- improve output when enumerating actions using --verbose
+- add polkit-1 man page and rework cmd/options handling
+- add serialization for subjects and implement Enumerate{Users,Groups}
+- add subject interface and some classes implementing this interface
+- return NULL for GIcon if there is no icon
+- add --version option
+- bring back annotations
+- slightly rework commandline tool
+- forgot to add polkitprivate.h
+- forgot to add polkittypes.h
+- update to latest EggDBus and rework how things are done
+- keep up with EggDBus HEAD, in the removal of _async() and addition of sync()
+- rework AuthorizationClaim to be a GInterface so we can pass it over D-Bus
+- fix up namespacing for backend
+- port the .policy file parser and implement EnumerateActions
+- add core polkit actions
+- add a ActionPool class and rename BackendLocal to BackendLocalAuthority
+- turn PolkitActionDescription into an user defined struct
+- use eggdbus to generate the AuthorizationResult enumeration
+- fix up gtkdoc cleaning
+- change code style to be like GLib and generate error domain
+- update for arg shuffling in EggDBus HEAD
+- implement EnumerateUsers()
+- forgot to add local backend impl
+- start using EggDBus
+- fix up autogen.sh
+- initial commit
+- api cleanup (part 1)
+- add backend daemon
+- also remove polkitd for now
+- bump to version 0.90 and ensure we're parallel installable with 0.9
+- update NEWS again
+- fix 'make distcheck'
+- update NEWS for release
+- update README (for the right wiki page) and COPYING (for my email address)
+- fix up permissions / docs for certain helpers and files/directories
+- always allow uid 0 to ask about authorizations for anyone
+- remove watch on fd when reaching EOF
+- fix typo
+- fix autotools screwup
+- fix some build stuff to so the test suites run
+- need to link with libkit.la for some helpers
+- add support for FreeBSD
+- update NEWS for release
+- be careful about what symbols we export
+- ensure object is first in the list/hash iterator callback functions
+- print warning to stderr if a policy file is malformed and we're ignoring it
+- fix issue where users allowed to change defaults can delete override files
+- don't include libkit api docs
+- fix build when tests are disabled
+- don't leak the copied authorizations list on OOM
+- clear the right block when growing a string
+- print stack traces for where leaks were allocated
+- add support for Solaris platform
+- fix for CVE-2008-1658: format string vulnerability in password input
+- remove more debug spew
+- remove debug spew
+- invalidate memory cache after revoking one shot authorization
+- handle kit_strdup failure.
+- avoid unnecessary/leaky use of strdup.
+- (do_auth): rename local: s/buf/password/
+- remove unnecessary strdup.
+- handle kit_strdup_printf failure.
+- clarify docs for POLKIT_AUTHORIZATION_CONSTRAINT_TYPE_REQUIRE_EXE
+- don't check key/values in KitHash; they are not neccesarily pointers
+- fix typo in docs for polkit_dbus_error_parse_from_strings()
+- also add polkit_dbus_error_parse_from_strings() function
+- add convenience API to consistently report authorization failures over D-Bus
+- make polkit-policy-file-validate require that actions are properly packaged
+- fix doc in bugs for PolKitContextAddIOWatch
+- avoid reliance on DT_REG so we work on reiserfs as well
+- avoid use normal timeout when showing auth dialog; use INT_MAX instead
+- actually check for bash in polkit-bash-completion.sh
+- also add the new C file for the shadow helper
+- add Shadow authentication framework
+- make polkit-grant-helper-pam world readable
+- split out authentication framework from authorisation database
+- remove unncessary PAM header inclusions
+- make the docs show an index of new symbols in 0.8
+- fix typo in docs
+- add docs and bash completion bits for new exe and selinux_context constraints
+- add additional checks when using strtoul
+- add note about new polkit-resolve-exe-helper
+- add constraints for exe and SELinux context when granting an authorization
+- add bogus Returns: to make gtk-doc happy
+- use strlen to avoid writing garbage at the end of the test auth file
+- post release version bump to 0.8
+- be more precise about permissions in the blurb at the end of configure
+- update NEWS file
+- update completion + man page since polkit-auth(1) takes >1 --constraint args
+- update TODO to mention Piter PUNK's patch
+- update TODO
+- fix dummy backend so it builds
+- refactor constraints API so there is one entry per constraint in the auth file
+- don't require .policy files for auth lookups
+- downgrade to session scope when granting authorizations for blank passwords
+- fix a bug where KitList elements were not properly freed
+- remove glib dep from libpolkit-dbus
+- implement kit_hash_foreach_remove()
+- add a new KitString class
+- add some more test cases for p-a-db.c
+- fix OOM handling in p-a-db.c and only invalidate the cache when necessary
+- add some more test env variables so we can bypass ConsoleKit in the tests
+- update .gitignore files
+- add .gitignore files to get test tree structure in the repo
+- fix unit tests for polkit-authorization-db.c
+- add test-friendly abstractions for getpwnam and getpwuid
+- only fail the Nth alloc, not all allocs greater than N
+- avoid logging to syslog even for invalid files
+- relicense everything to the MIT/X11 license
+- add (partial) test cases for polkit-authorization-db.c
+- build with -rdynamic for maint mode and use this to print a stack trace
+- fix a bug where the childs environment wasn't inherited
+- add test harness for polkit-utils
+- write newline since kit_string_entry_create doesn't do that any more
+- avoid adding newline at the end of generated entry
+- update TODO
+- also encode \n\r\t characters
+- rework the .auths file format to use key/value pairs and make it future-proof
+- set errno to ENOMEM when forcibly failing an allocation
+- add support for percent encoding/decoding and colon separated kv-lists
+- make dummy backend work
+- fix 'make check-coverage'
+- remove Since gtk-doc tags from the internal libkit library
+- define abstract Authentication Agent interface and make polkit-auth(1) use it
+- make PolKitAuthorization a bit more future proof by adding get_type()
+- provide a way to force a reload of all caches etc.
+- add support for negative authorizations
+- export the policydir in the .pc file
+- require org.fd.pk.revoke to revoke auths for self if granted by someone else
+- provide convenience functions for auth checking and port helpers to use them
+- add support for vendor, vendor_url and icon_name tags in .policy files
+- restrict new API to the default backend only
+- add API for overriding defaults and make polkit-action(1) use this API.
+- fix a grave bug where the wrong authorizations were returned
+- fix parallel build
+- create /var/lib/misc on 'make install'
+- build system fixes and refuse to install if built with --enable-tests
+- add unit test framework to the rest of the library sources
+- fix build for dummy backend
+- also check for file descriptor leaks
+- tweak how we do coverage reporting
+- remove glib dependency from libpolkit.so
+- don't overflow when splitting a string
+- actually include the files with the spawn functions
+- add spawn function to libkit
+- add (empty, for now) tests for remaining files
+- use kit_strsplit in polkit-sysdeps
+- add strsplit function
+- also include libkit in top-level coverage report
+- split utility bits into a private statically linked library
+- add unit tests for PolKitAuthorization
+- add unit tests for PolKitAuthorizationConstraint
+- forgot to add src/Makefile.am
+- add unit tests of PolKitPolicyCache
+- use unique action names
+- add test case for PolKitError to get to 100%
+- add some gtk-doc to private bits to get doc coverage to 100%
+- fix build with all library soruce in src/
+- move all library source to a src/ directory
+- reimplement string hashing and comparison
+- add doubly-linked lists
+- hook up expat to use our memory handling API
+- also dist test .policy files
+- increase test coverage for PolKitPolicyFile
+- fix some unaligned access bugs
+- add unit tests for PolKitPolicyFile and add some features to PolKitHash
+- improve coverage of PolKitPolicyFileEntry by switching to PolKitHashTable
+- implement polkit_hash_foreach
+- export memory mangement and hash table functions
+- implement our own hash table with 100% test coverage
+- add unit tests for PolKitPolicyFileEntry
+- add unit tests for PolKitPolicyDefault
+- add unit tests for PolKitCaller
+- add unit tests for PolKitSession
+- add unit tests for PolKitSeat
+- add unit tests for PolKitResult
+- implement OOM testing
+- add tests for PolKitError
+- remove dead code
+- extend test coverage for PolKitAction
+- add unit test framework with gcov coverage support (make check-coverage)
+- updated TODO list
+- introduce one-shot authorizations
+- make polkit_context_is_[caller|session]_authorized() take a PolKitError
+- rename revoke_if_oneshot to is_mechanism and also expose this on D-Bus
+- avoid defining the same functions in both libpolkit and libpolkit-grant
+- remember to reset killtimer and fix an error message
+- provide a polkit D-Bus service that is activated on demand
+- move authdb write functions to libpolkit-grant
+- rearrange the docs so all API is in one section
+- use _destroy, not _unref for hash tables
+- fix uid retrival when getting auths from all users
+- fix docs
+- fix build with dummy backend
+- let authdb backends synthesize policy file entries
+- minor build system and doc fixes
+- move Linux specific code into a single file
+- move all private functions into a private header file
+- make the authdb pluggable and add a dummy backend as an example
+- rewrite authorization database and polkit-grant (now known as polkit-auth)
+- remember to set uid on PolKitSession
+- move POLKIT_GNUC_DEPRECATED to a separate line so gtk-doc is happy
+- create an API for interfacing with the Authorization Database
+- add docs for POLKIT_[BEGIN|END]_DECLS and also add POLKIT_GNUC_DEPRECATED
+- use the Since: tag so gtk-doc can print what symbols are new in 0.7
+- work on the docs
+- don't spew debug output in libpolkit-dbus
+- avoid including regex.h from a public header file
+- add C++ include guards and a new method to get pfe's by annotation
+- add support to PolKitTracker for also asking on pid
+- post-release version bump
+- add id's so the generated HTML has stable and predictable file names
+- add the convenience class PolKitTracker
+- update NEWS
+- make polkit-list-actions print information about <allow_any>
+- don't fail on unknown XML tags, just skip them
+- implement <allow_any> to specify default answer for any user
+- add TODO item detailing how to handle upgrades
+- add specifics for the Pardus distro
+- use chgrp instead of chown with group only
+- install hook for setuid/setgid
+- gentoo OS type support
+- post-release version bump
+- update NEWS file
+- bump so name
+- fix 'make distcheck' by avoiding with man pages on distcheck
+- make polkit-grant-helper-pam out of reach for normal users
+- add an example of how define_admin_auth is used
+- minor doc changes
+- also forgot to add polkit-docs.xml
+- also add another missing file
+- forgot to add doc/version.xml.in
+- make config file override grant database
+- some more doc fixes
+- update inline API docs
+- fix up manual pages for some trivial errors
+- revert "fixed code documentation issues"
+- clean up our documentation
+- convert manual page sources to Docbook, add polkit-config-file-validate tool
+- delay loading the configuration until it's needed
+- Merge branch 'master' of ssh://david@git.freedesktop.org/git/PolicyKit
+- give a little love to polkit-list-actions(1) and polkit-grant(1)
+- fixed compiler warning about uid_t handling
+- fixed code documentation issues
+- add support for annotations
+- work when SELinux is disabled
+- gracefully handle bad config/policy files, drop polkit-reload-config, syslog
+- avoid the now defunct group concept in polkit-list-actions
+- minor doc cleanups
+- rip out group concept from .policy files and rename <policy> element to <action>
+- make libpolkit-grant less noisy
+- make polkit-grant(1) work with <define_admin_user /> feature
+- handle the case where we don't load descriptions
+- properly support i18n'ed messages from .policy files
+- export PolKitConfig and provide a <define_admin_auth/> config file directive
+- when granting privileges, touch the /var/lib/PolicyKit/reload file
+- make the /var/lib/PolicyKit/reload writable for group polkituser
+- use correct type for conversation_done() function
+- post-release version number bump
+- provide a high-level interaction diagram of how this works
+- use waitpid() to avoid Zombie processes
+- put back isatty() checks when calling user is not uid 0
+- remove the isatty() call so it's easier to audit the helper
+- move PAM stack usage to separate helper
+- added missing files to git repo
+- actually reload config and policy files when they change
+- update NEWS
+- for PolKitContext, mention that a mechanism need to provide .policy files
+- fix up proper naming of some methods on the PolKitPolicyFileEntry class
+- fix docs
+- require that policy files also provide a <message> element
+- fix typo
+- change default username
+- fix up some of the docs
+- remove RESULT_NOT_AUTHORIZED_TO_KNOW and s/RESULT_UNKNOWN_ACTION/RESULT_UNKNOWN/
+- switch from VIA_ROOT to VIA_ADMIN
+- update TODO
+- document the /etc/PolicyKit/PolicyKit.conf file with a manual page
+- add support for an /etc/PolicyKit/PolicyKit.conf config file
+- get proper pid and SELinux context
+- replace configuration reload mechanism
+- remove the notion of modules
+- post-release version bump
+- update NEWS
+- add some more TODO items
+- update HACKING and TODO
+- update TODO
+- add the spec
+- fix small typo so _keep_always granting works again
+- make .policy files live in /usr/share, not /etc
+- build fixes
+- move all grant writing/checking into a separate private library
+- remove the distinction for local vs. remote users
+- rip out the notion of Resources
+- switch to XML for policy definition files and introduce descriptions
+- also remember to do s/libpolkit/polkit/ on the pkg-config files
+- rename libpolkit to polkit
+- add some validation to public facing functions
+- remove misguided action parameters
+- add the PAM configuration file
+- add pkg-config files for the two new libraries
+- add the correct version files for docs
+- add grant functionality + lots of other changes
+- remove all usage of glib from the header files
+- associate parameters (key/value pairs) with the Action class
+- remember to set session's ConsoleKit object path
+- policy files now have the .policy extension, not .priv
+- no need to reference polkit-module-default twice in a man page
+- minor fixes to the PolicyKit manual page
+- mass renaming of classes
+- fix up Makefile.am
+- generate and dist ChangeLog
+- add built-in options and a new module pam-polkit-run-program.so
+- stop disting ChangeLog and start disting modules/PolicyKit.conf
+- add module loading to PolicyKit
+- watch the correct directory
+- really ignore privilege files starting with "." this time
+- refine file monitoring interface and implement policy reload
+- make polkit-privilege-file-validate accept multiple files
+- move to using _pk_debug and respect $POLKIT_DEBUG
+- read privilege files and actually use the policy described in those
+- provide an example privilege file
+- include PolKitPrivilegeFile in API docs
+- introduce a PolKitResult enumeration and make privilege files use that
+- add support for privilege files and provide a validation tool
+- get rid of AS_AC_EXPAND and use autoconf docdir
+- no need to mention $(top_srcdir) twice
+- build fix so 'make distcheck' works
+- add two tools polkit-check-caller and polkit-check-session
+- implement the classes carrying data
+- document the API
+- split libpolkit into more source/header files
+- proposed API
+- update to the gtk-doc.make from the HAL project
+- reset project and remove all existing code
+- fix make distcheck
+- stop configure if pam/pam-devel is missing
+- Patch from Danny Kukawka <danny.kukawka@web.de> with some cleanup.s
+- Add ChangeLog and *.tar.gz to .gitignore.
+- Remove ChangeLog file and add rules to Makefile.am to generate one for disted tarballs.
+- .cvsignore -> .gitignore
+- For now, comment out SELinux stuff as it breaks when SELinux is not     available.
+- Patch from Frederic Peters <fpeters@entrouvert.com>. jhbuild monitors files     being installed and prevents them from being written out of its target     directory. This means HAL now prevents jhautobuild[1] to complete since     pam-polkit-console hardcodes /lib/security. Attached is a patch with a     configure option (--with-pam-module-dir) so it is possible to set an     other directory. [1] http://jhbuild.bxlug.be
+- Patch from Frederic Peters <fpeters@entrouvert.com>.     http://jhbuild.bxlug.be/builds/2006-06-06-0000/logs/PolicyKit/#build     shows a error when building newest PolicyKit with Debian PAM libraries. Attached patch adds new configure checks; pam-polkit-console.c may need     alternate behaviour if pam_vsyslog is missing (using straight     vsyslog?). configure.in,
+- Lots of changes! Almost ready for 0.2 release.
+- Update to new D-BUS API; print " (temporary)" for privilege if appropriate. Update to new D-BUS API Update to new D-BUS API (main): --do-- New file Add build rules for polkit-revoke-privilege Fix up prototypes Update to new D-BUS API     (polkit_manager_get_allowed_resources_for_privilege): --do--     (polkit_manager_revoke_temporary_privilege): New function     (polkit_manager_remove_temporary_privilege): Fix up resource handling     (polkit_manager_add_temporary_privilege): --do-- Update to new D-BUS API and export libpolkit_revoke_temporary_privilege() Update to new D-BUS API     (libpolkit_get_allowed_resources_for_privilege_for_uid): --do--     (libpolkit_revoke_temporary_privilege): New function Rename InitiatePrivilegeGrant() to InitiateTemporaryPrivilegeGrant(). Add     new function RevokeTemporaryPrivilege(). Make IsUserPrivileged() output     a boolean is_temporary. GetAllowedResourcesForPrivilege() now also     outputs an integer num_non_temp.
+- Write some more stuff
+- Add in the new spec directory so we add the folder to the tarball. Fix this up in one place so it validates and so that make distcheck can run     again..
+- Add docbook detection New files Free the questions to prevent memory leak
+- initial commit
+- Add these files.
+- remove code that shouldn't be committed
+- Remember to kill the child here
+- forgot ChangeLog for polkitd/main.c
+- Unref when the child dies (polkit_session_initiate_auth): Ref the object     after creating child (polkit_session_initiator_disconnected): Make sure     to nuke the kids
+- Include sys/types.h; fixed fd.o bug #6280. Patch from Wouter Bolsterlee     <uws+freedesktop@xs4all.nl>.
+- Change priorities from 90 10 to 98 02 to make this work Remove user="@POLKIT_USER@" bits as I'm not sure we need a dedicated user Cosmetic things
+- remove Makefile.in; it's not needed
+- Add SUSE distro bits.
+- forgot two files
+- Add a bunch of code; basically a full rewrite moving all queries to the     daemon.
+- Use right Cflags
+- s/hal-policy/polkit/
+- Use simpler names: user, group and txtsrc :-/
+- Add libpoluser, libpolgroup and libpoltxtsrc variables
+- s/-llibpolkit/-lpolkit/
+- Initial import
+- Initial revision
+
