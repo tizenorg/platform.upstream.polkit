@@ -566,7 +566,7 @@ echo "
 
 "
 
-echo "NOTE: The file ${prefix}/lib/polkit-1/polkit-agent-helper-1 must be owned"
+echo "NOTE: The file ${libdir}/polkit-1/polkit-agent-helper-1 must be owned"
 echo "      by root and have mode 4755 (setuid root binary)"
 echo
 

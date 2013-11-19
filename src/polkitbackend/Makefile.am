@@ -67,7 +67,7 @@ rules_DATA = 50-default.rules
 
 # ----------------------------------------------------------------------------------------------------
 
-libprivdir = $(prefix)/lib/polkit-1
+libprivdir = $(libdir)/polkit-1
 libpriv_PROGRAMS = polkitd
 
 polkitd_SOURCES = 							\

@@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =                               		\
 
 libpolkit_agent_1_la_LDFLAGS = -export-symbols-regex '(^polkit_.*)'
 
-libprivdir = $(prefix)/lib/polkit-1
+libprivdir = $(libdir)/polkit-1
 libpriv_PROGRAMS = polkit-agent-helper-1
 
 polkit_agent_helper_1_SOURCES = 					\
