@@ -1,3 +1,7 @@
+* Fri Jan 24 2014 Patrick McCarty <patrick.mccarty@linux.intel.com> 504e2c3
+- Don't add the polkitd user/group in %pre; this user and group are installed
+  by the 'setup' package.
+
 * Tue Nov 19 2013 Michael Leibowitz <michael.leibowitz@intel.com> 0.112@847366c
 - package polkit for tizen
 - prefix/lib/polkit -> libdir/polkit

@@ -26,7 +26,6 @@ Requires:       systemd
 Requires(post):   systemd
 Requires(preun):  systemd
 Requires(postun): systemd
-Requires(pre):    pwdutils
 
 %description
 PolicyKit is a toolkit for defining and handling authorizations.
@@ -111,10 +110,6 @@ make %{?_smp_mflags}
 install -d %{buildroot}%{_localstatedir}/lib/polkit
 %find_lang polkit-1
 %install_service graphical.target.wants polkit.service
-
-%pre
-getent group polkitd > /dev/null || /usr/sbin/groupadd -r polkitd
-getent passwd polkitd > /dev/null || /usr/sbin/useradd -r -g polkitd -d %{_localstatedir}/lib/polkit -s /sbin/nologin -c "User for polkitd" polkitd
 
 %post -n libpolkit -p /sbin/ldconfig
 
