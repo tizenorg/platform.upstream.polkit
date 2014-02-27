@@ -29,6 +29,7 @@
 #include "polkitprivate.h"
 
 #include "polkitunixprocess.h"
+#include "polkitsmackprocess.h"
 
 /**
  * SECTION:polkitsystembusname
@@ -360,6 +361,8 @@ polkit_system_bus_name_get_process_sync (PolkitSystemBusName  *system_bus_name,
   PolkitSubject *ret;
   GVariant *result;
   guint32 pid;
+  guint32 uid;
+  char *label;
 
   g_return_val_if_fail (POLKIT_IS_SYSTEM_BUS_NAME (system_bus_name), NULL);
   g_return_val_if_fail (cancellable == NULL || G_IS_CANCELLABLE (cancellable), NULL);
@@ -388,7 +391,43 @@ polkit_system_bus_name_get_process_sync (PolkitSystemBusName  *system_bus_name,
   g_variant_get (result, "(u)", &pid);
   g_variant_unref (result);
 
-  ret = polkit_unix_process_new (pid);
+  result = g_dbus_connection_call_sync (connection,
+                                        "org.freedesktop.DBus",       /* name */
+                                        "/org/freedesktop/DBus",      /* object path */
+                                        "org.freedesktop.DBus",       /* interface name */
+                                        "GetConnectionUnixUser",      /* method */
+                                        g_variant_new ("(s)", system_bus_name->name),
+                                        G_VARIANT_TYPE ("(u)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        cancellable,
+                                        error);
+  if (result == NULL)
+    goto out;
+
+  g_variant_get (result, "(u)", &uid);
+  g_variant_unref (result);
+
+
+
+  result = g_dbus_connection_call_sync (connection,
+                                        "org.freedesktop.DBus",       /* name */
+                                        "/org/freedesktop/DBus",      /* object path */
+                                        "org.freedesktop.DBus",       /* interface name */
+                                        "GetConnectionSmackContext",  /* method */
+                                        g_variant_new ("(s)", system_bus_name->name),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        cancellable,
+                                        error);
+
+  if (result == NULL)
+    goto out;
+
+  g_variant_get (result, "(s)", &label);
+  g_variant_unref (result);
+  ret = polkit_smack_process_new_full (pid, 0, uid, label);
 
  out:
   if (connection != NULL)
