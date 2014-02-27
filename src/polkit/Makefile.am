@@ -46,6 +46,7 @@ libpolkit_gobject_1include_HEADERS =                        				\
 	polkiterror.h									\
 	polkitsubject.h									\
 	polkitunixprocess.h								\
+	polkitunixprocessprivate.h							\
 	polkitunixsession.h								\
 	polkitsystembusname.h								\
 	polkitidentity.h								\
@@ -69,6 +70,7 @@ libpolkit_gobject_1_la_SOURCES =                                   			\
 	polkiterror.c				polkiterror.h				\
 	polkitsubject.c				polkitsubject.h				\
 	polkitunixprocess.c			polkitunixprocess.h			\
+	polkitsmackprocess.c			polkitsmackprocess.h			\
 	polkitsystembusname.c			polkitsystembusname.h			\
 	polkitidentity.c			polkitidentity.h			\
 	polkitunixuser.c			polkitunixuser.h			\

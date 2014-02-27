@@ -35,6 +35,7 @@
 #include <stdio.h>
 
 #include "polkitunixprocess.h"
+#include "polkitunixprocessprivate.h"
 #include "polkitsubject.h"
 #include "polkitprivate.h"
 #include "polkiterror.h"
@@ -50,25 +51,6 @@
  * time of the process (a monotonic increasing value representing the
  * time since the kernel was started) is used.
  */
-
-/**
- * PolkitUnixProcess:
- *
- * The #PolkitUnixProcess struct should not be accessed directly.
- */
-struct _PolkitUnixProcess
-{
-  GObject parent_instance;
-
-  gint pid;
-  guint64 start_time;
-  gint uid;
-};
-
-struct _PolkitUnixProcessClass
-{
-  GObjectClass parent_class;
-};
 
 enum
 {

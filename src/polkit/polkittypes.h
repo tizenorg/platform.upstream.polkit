@@ -35,6 +35,9 @@ typedef struct _PolkitSubject PolkitSubject; /* Dummy typedef */
 struct _PolkitUnixProcess;
 typedef struct _PolkitUnixProcess PolkitUnixProcess;
 
+struct _PolkitSmackProcess;
+typedef struct _PolkitSmackProcess PolkitSmackProcess;
+
 struct _PolkitUnixSession;
 typedef struct _PolkitUnixSession PolkitUnixSession;
 

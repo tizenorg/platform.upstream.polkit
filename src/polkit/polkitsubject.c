@@ -25,9 +25,11 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "polkitsubject.h"
 #include "polkitunixprocess.h"
+#include "polkitsmackprocess.h"
 #include "polkitunixsession.h"
 #include "polkitsystembusname.h"
 #include "polkiterror.h"
@@ -264,6 +266,18 @@ polkit_subject_from_string  (const gchar   *str,
             }
         }
     }
+  else if (g_str_has_prefix (str, "smack-process:"))
+    {
+      gint scanned_pid;
+      guint64 scanned_starttime;
+      gint scanned_uid;
+      const char *scanned_label = NULL;
+      if (sscanf (str, "smack-process:%d:%" G_GUINT64_FORMAT ":%d:%as", &scanned_pid, &scanned_starttime, &scanned_uid, &scanned_label) == 4)
+	{
+	  subject = polkit_smack_process_new_full (scanned_pid, scanned_starttime, scanned_uid, scanned_label);
+	  free ((void*)scanned_label);
+	}
+    }
   else if (g_str_has_prefix (str, "unix-session:"))
     {
       subject = polkit_unix_session_new (str + sizeof "unix-session:" - 1);
@@ -306,6 +320,22 @@ polkit_subject_to_gvariant (PolkitSubject *subject)
                              g_variant_new_uint64 (polkit_unix_process_get_start_time (POLKIT_UNIX_PROCESS (subject))));
       g_variant_builder_add (&builder, "{sv}", "uid",
                              g_variant_new_int32 (polkit_unix_process_get_uid (POLKIT_UNIX_PROCESS (subject))));
+    }
+  else if (POLKIT_IS_SMACK_PROCESS (subject))
+    {
+      /**
+       * @FIXME: this could be dryer
+       */
+      kind = "smack-process";
+      g_variant_builder_add (&builder, "{sv}", "pid",
+                             g_variant_new_uint32 (polkit_unix_process_get_pid (POLKIT_UNIX_PROCESS (subject))));
+      g_variant_builder_add (&builder, "{sv}", "start-time",
+                             g_variant_new_uint64 (polkit_unix_process_get_start_time (POLKIT_UNIX_PROCESS (subject))));
+      g_variant_builder_add (&builder, "{sv}", "uid",
+                             g_variant_new_int32 (polkit_unix_process_get_uid (POLKIT_UNIX_PROCESS (subject))));
+      g_variant_builder_add (&builder, "{sv}", "label",
+			     g_variant_new_string (polkit_smack_process_get_label (POLKIT_SMACK_PROCESS (subject))));
+
     }
   else if (POLKIT_IS_UNIX_SESSION (subject))
     {
@@ -399,7 +429,7 @@ polkit_subject_new_for_gvariant (GVariant  *variant,
                  &kind,
                  &details_gvariant);
 
-  if (g_strcmp0 (kind, "unix-process") == 0)
+  if (g_strcmp0 (kind, "unix-process") == 0 || g_strcmp0 (kind, "smack-process") == 0)
     {
       GVariant *v;
       guint32 pid;
@@ -435,7 +465,26 @@ polkit_subject_new_for_gvariant (GVariant  *variant,
           uid = -1;
         }
 
-      ret = polkit_unix_process_new_for_owner (pid, start_time, uid);
+      if (g_strcmp0 (kind, "smack-process") == 0)
+	{
+	  const gchar *label;
+
+	  v = lookup_asv(details_gvariant, "label", G_VARIANT_TYPE_STRING, error);
+
+	  if (v == NULL)
+	    {
+	      g_prefix_error (error, "Error parsing unix-process subject: ");
+	      goto out;
+	    }
+	  label = g_variant_get_string(v, NULL);
+	  g_variant_unref(v);
+
+	  ret = polkit_smack_process_new_full (pid, start_time, uid, label);
+	}
+      else
+	{
+	  ret = polkit_unix_process_new_for_owner (pid, start_time, uid);
+	}
     }
   else if (g_strcmp0 (kind, "unix-session") == 0)
     {

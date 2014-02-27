@@ -35,6 +35,7 @@
       <title>Subjects</title>
       <xi:include href="xml/polkitsubject.xml"/>
       <xi:include href="xml/polkitunixprocess.xml"/>
+      <!-- <xi:include href="xml/polkitsmackprocess.xml"/> -->
       <xi:include href="xml/polkitunixsession.xml"/>
       <xi:include href="xml/polkitsystembusname.xml"/>
     </chapter>
