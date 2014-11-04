@@ -109,7 +109,7 @@ make %{?_smp_mflags}
 %make_install
 install -d %{buildroot}%{_localstatedir}/lib/polkit
 %find_lang polkit-1
-%install_service graphical.target.wants polkit.service
+%install_service default.target.wants polkit.service
 
 %post -n libpolkit -p /sbin/ldconfig
 
@@ -154,7 +154,7 @@ install -d %{buildroot}%{_localstatedir}/lib/polkit
 %verify(not mode) %attr(4755,root,root) %{_libdir}/polkit-1/polkit-agent-helper-1
 # $HOME for polkit user
 %dir %{_localstatedir}/lib/polkit
-%{_unitdir}/graphical.target.wants/polkit.service
+%{_unitdir}/default.target.wants/polkit.service
 %{_unitdir}/polkit.service
 
 %files devel
